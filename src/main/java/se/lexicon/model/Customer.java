@@ -46,7 +46,7 @@ public class Customer {
         StringBuilder builder = new StringBuilder();
         builder.append("Customer: ").append(id)
                 .append(", Name: ").append(name)
-                .append(", PhoneNumber").append(phoneNumber);
+                .append(", PhoneNumber: ").append(phoneNumber);
         if (reservation != null){
             builder.append(", Reservation: YES");
         } else {
