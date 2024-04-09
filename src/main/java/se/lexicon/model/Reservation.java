@@ -1,6 +1,5 @@
 package se.lexicon.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Reservation {
@@ -13,8 +12,6 @@ public class Reservation {
 
     public Reservation(Customer customer, ParkingSpot parkingSpot, int hours, Vehicle associatedVehicle) {
         this.customer = customer;
-
-
         this.parkingSpot = parkingSpot;
         this.startTime = LocalDateTime.now();
         setEndTime(hours);
@@ -70,18 +67,30 @@ public class Reservation {
     public void cancel() {
         parkingSpot.vacate();
         customer.setReservation(null);
+        //setCustomer(null);
     }
+
+    /*public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }*/
 
     public String getDescription() {
 
-        return new StringBuilder()
-                .append("Reservation Id: ").append(id)
-                .append(",bCustomer: ").append(customer.getName())
-                .append(", Parking Spot: ").append(parkingSpot.getSpotNumber())
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("Reservation Id: ").append(id);
+        if (customer == null) {
+            builder.append(", Customer: ").append(" - ");
+        } else {
+            builder.append(", Customer: ").append(customer.getDescription());
+        }
+
+        builder.append(", Parking Spot: ").append(parkingSpot.getSpotNumber())
                 .append(", Start Time: ").append(startTime)
                 .append(", End Time: ").append(endTime)
-                .append(", Associated Vehicle: ").append(associatedVehicle.getLicensePlate())
-                .toString();
+                .append(", Associated Vehicle: ").append(associatedVehicle.getLicensePlate());
+
+        return builder.toString();
 
     }
 

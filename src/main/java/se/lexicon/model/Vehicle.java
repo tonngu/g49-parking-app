@@ -27,7 +27,7 @@ public class Vehicle {
     }
 
     public String getDescription() {
-        String result =  "This is a " + type + " with license plate " + licensePlate;
+        String result = "This is a " + type + " with license plate " + licensePlate;
         return result;
     }
 

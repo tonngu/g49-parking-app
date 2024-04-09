@@ -22,11 +22,11 @@ public class ParkingSpot {
         return areaCode;
     }
 
-    public void occupy(){
+    public void occupy() {
         occupied = true;
     }
 
-    public void vacate(){
+    public void vacate() {
         occupied = false;
     }
 

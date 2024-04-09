@@ -47,7 +47,7 @@ public class Customer {
         builder.append("Customer: ").append(id)
                 .append(", Name: ").append(name)
                 .append(", PhoneNumber: ").append(phoneNumber);
-        if (reservation != null){
+        if (reservation != null) {
             builder.append(", Reservation: YES");
         } else {
             builder.append(", Reservation: NO");
