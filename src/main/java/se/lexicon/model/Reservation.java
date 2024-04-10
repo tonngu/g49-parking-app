@@ -51,7 +51,9 @@ public class Reservation {
     }
 
     public void setEndTime(int hours) {
-        // todo: add validation if hours is negative or 0
+        if (hours <= 0){
+            throw new IllegalArgumentException("Hours should be a positive number");
+        }
         this.endTime = startTime.plusHours(hours);
     }
 
