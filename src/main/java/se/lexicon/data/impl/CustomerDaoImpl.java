@@ -43,7 +43,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Optional<Customer> findAll() {
+    public ArrayList<Customer> findAll() {
         return new ArrayList<>(storage);
     }
 }

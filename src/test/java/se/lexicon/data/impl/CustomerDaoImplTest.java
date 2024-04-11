@@ -73,13 +73,18 @@ public class CustomerDaoImplTest {
         Customer customer2 = new Customer("Test2", "54321");
         testObject.create(customer1);
         testObject.create(customer2);
+        ArrayList<Customer> actualValue = testObject.findAll();
+        assertEquals(2, actualValue.size());
+        assertTrue(actualValue.contains(customer1));
+        assertTrue(actualValue.contains(customer2));
 
     }
 
     @Test
     public void testFindAllCustomersEmptyList() {
         //todo: Implement JUnit test
-
+        ArrayList<Customer> actualValue = testObject.findAll();
+        assertTrue(actualValue.isEmpty());
     }
 
 }

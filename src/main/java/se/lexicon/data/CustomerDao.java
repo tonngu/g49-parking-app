@@ -2,6 +2,7 @@ package se.lexicon.data;
 
 import se.lexicon.model.Customer;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public interface CustomerDao {
@@ -12,5 +13,5 @@ public interface CustomerDao {
 
     boolean remove(int id);
 
-    Optional<Customer> findAll();
+    ArrayList<Customer> findAll();
 }

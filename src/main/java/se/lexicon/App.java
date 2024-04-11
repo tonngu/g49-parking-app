@@ -1,5 +1,6 @@
 package se.lexicon;
 
+import se.lexicon.data.impl.CustomerDaoImpl;
 import se.lexicon.data.impl.ParkingSpotDaoImpl;
 import se.lexicon.model.Customer;
 import se.lexicon.model.ParkingSpot;
@@ -28,6 +29,9 @@ public class App {
 
         System.out.println(parkingSpot1.getDescription());
 
+        Customer customer2 = new Customer("Test2", "222222");
+        Customer customer3 = new Customer("Test3", "333333");
+        CustomerDaoImpl customerDao1 = new CustomerDaoImpl();
 
 
 
