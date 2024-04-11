@@ -14,7 +14,7 @@ public interface ParkingSpotDao {
 
     List<ParkingSpot> findAll();
 
-    List<ParkingSpot> findByAreaCode(int areaCode);
+    Optional<ParkingSpot> findByAreaCode(int areaCode);
 
     void occupyParkingSpot(int spotNumber);
 

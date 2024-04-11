@@ -11,9 +11,9 @@ public interface ReservationDao {
 
     boolean remove(String id);
 
-    Reservation findByCustomerId(int customerId);
+    Optional<Reservation> findByCustomerId(int customerId);
 
-    Reservation findByVehicleLicensePlate(String licensePlate);
+    Optional<Reservation> findByVehicleLicensePlate(String licensePlate);
 
-    Reservation findByParkingSpotNumber(int spotNumber);
+    Optional<Reservation> findByParkingSpotNumber(int spotNumber);
 }

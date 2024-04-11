@@ -1,5 +1,6 @@
 package se.lexicon;
 
+import se.lexicon.data.impl.ParkingSpotDaoImpl;
 import se.lexicon.model.Customer;
 import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
@@ -17,33 +18,17 @@ public class App {
 
 
         ParkingSpot parkingSpot1 = new ParkingSpot(1, 47001);
-        ParkingSpot parkingSpot2 = new ParkingSpot(2, 47001);
+        parkingSpot1.occupy();
+
+        System.out.println(parkingSpot1.getDescription());
+
+        ParkingSpotDaoImpl parkingSpotStorage1 = new ParkingSpotDaoImpl();
+        parkingSpotStorage1.create(parkingSpot1);
+        parkingSpotStorage1.vacateParkingSpot(1);
+
+        System.out.println(parkingSpot1.getDescription());
 
 
-        System.out.println(parkingSpot1);
-        System.out.println(parkingSpot2);
-        System.out.println(vehicle1.getDescription());
-        System.out.println(customer1.getDescription());
-
-        Reservation reservation1 = new Reservation(customer1, parkingSpot1, 4, vehicle1);
-        reservation1.setId(UUID.randomUUID().toString());
-        reservation1.reserve();
-
-        System.out.println("------------------");
-        System.out.println(parkingSpot1);
-        System.out.println(parkingSpot2);
-        System.out.println(vehicle1.getDescription());
-        System.out.println(customer1.getDescription());
-        System.out.println(reservation1.getDescription());
-        System.out.println("------------------");
-
-        reservation1.cancel();
-
-        System.out.println(parkingSpot1);
-        System.out.println(parkingSpot2);
-        System.out.println(vehicle1.getDescription());
-        System.out.println(customer1.getDescription());
-        System.out.println(reservation1.getDescription());
 
 
 
