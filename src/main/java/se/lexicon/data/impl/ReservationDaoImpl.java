@@ -1,6 +1,8 @@
 package se.lexicon.data.impl;
 
 import se.lexicon.data.ReservationDao;
+import se.lexicon.data.sequencer.ReservationSequencer;
+import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
 
 import java.util.ArrayList;
@@ -13,6 +15,23 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Reservation create(Reservation reservation) {
+        if (reservation == null) throw new IllegalArgumentException("Reservation data is null.");
+
+        Optional<Reservation> reservationOptional = find(reservation.getId());
+        if (reservationOptional.isPresent()) throw new IllegalArgumentException("Reservation already exists in the storage.");
+
+        reservationOptional = findByCustomerId(reservation.getCustomer().getId());
+        if (reservationOptional.isPresent()) throw new IllegalArgumentException("Reservation already exists in the storage.");
+
+        reservationOptional = findByParkingSpotNumber(reservation.getParkingSpot().getSpotNumber());
+        if (reservationOptional.isPresent()) throw new IllegalArgumentException("Reservation already exists in the storage.");
+
+        reservationOptional = findByVehicleLicensePlate(reservation.getAssociatedVehicle().getLicensePlate());
+        if (reservationOptional.isPresent()) throw new IllegalArgumentException("Reservation already exists in the storage.");
+
+        Integer id = ReservationSequencer.nextId();
+        reservation.setId(id.toString());
+
         storage.add(reservation);
         return reservation;
     }
@@ -37,21 +56,34 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public Optional<Reservation> findByCustomerId(int customerId) {
-        for (Reservation reservation : storage){
-
+        for (Reservation reservation : storage) {
+            if (reservation.getCustomer().getId() == customerId) {
+                return Optional.of(reservation);
+            }
         }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Reservation> findByVehicleLicensePlate(String licensePlate) {
-        return null;
+        for (Reservation reservation : storage){
+            if (reservation.getAssociatedVehicle().getLicensePlate().equals(licensePlate)){
+                return Optional.of(reservation);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
     public Optional<Reservation> findByParkingSpotNumber(int spotNumber) {
-        return null;
+        for (Reservation reservation : storage){
+            if (reservation.getParkingSpot().getSpotNumber() == spotNumber){
+                return Optional.of(reservation);
+            }
+        }
+        return Optional.empty();
     }
-    //todo: Implement necessary methods
+
 
 
 }
