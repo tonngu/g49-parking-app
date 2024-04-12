@@ -2,7 +2,6 @@ package se.lexicon.data.impl;
 
 import se.lexicon.data.ParkingSpotDao;
 import se.lexicon.model.ParkingSpot;
-import se.lexicon.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,6 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
     public ParkingSpot create(ParkingSpot parkingSpot) {
         if (parkingSpot == null) throw new IllegalArgumentException("Parking spot data is null.");
         Optional<ParkingSpot> parkingSpotOptional = find(parkingSpot.getSpotNumber());
-        if (parkingSpotOptional.isPresent()) throw new IllegalArgumentException("Parking Spot already exists in the storage.");
-        parkingSpotOptional = findByAreaCode(parkingSpot.getAreaCode());
         if (parkingSpotOptional.isPresent()) throw new IllegalArgumentException("Parking Spot already exists in the storage.");
         storage.add(parkingSpot);
         return parkingSpot;
@@ -48,13 +45,14 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
     }
 
     @Override
-    public Optional<ParkingSpot> findByAreaCode(int areaCode) {
+    public List<ParkingSpot> findByAreaCode(int areaCode) {
+        List<ParkingSpot> findResult = new ArrayList<>();
         for (ParkingSpot parkingSpot : storage) {
             if (parkingSpot.getAreaCode() == areaCode) {
-                return Optional.of(parkingSpot);
+                findResult.add(parkingSpot);
             }
         }
-        return Optional.empty();
+        return findResult;
     }
 
     @Override
